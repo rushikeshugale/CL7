@@ -1,0 +1,11 @@
+openssl genrsa -out pvt.pem
+cat pvt.pem
+openssl rsa -pubout -in pvt.pem -out pub.pem
+cat pub.pem
+openssl rsautl -encrypt -in file.txt -pubin -inkey pub.pem -out cip.bin
+cat cip.bin
+cat file.txt
+xxd cip.bin
+openssl rsautl -decrypt -in cip.bin -inkey pvt.pem -out dec.txt
+cat dec.txt
+

@@ -1,0 +1,64 @@
+﻿R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(readr)
+> Orange <- read_csv("F:/R prog/Orange.csv")
+Parsed with column specification:
+cols(
+  X1 = col_integer(),
+  Tree = col_integer(),
+  age = col_integer(),
+  circumference = col_integer()
+)
+Warning message:
+Missing column names filled in: 'X1' [1] 
+> View(Orange)
+> plot(Orange$age)
+> plot(Orange$age, Orange$circumference)
+> lm(Orange$age~Orange$circumference)
+
+Call:
+lm(formula = Orange$age ~ Orange$circumference)
+
+Coefficients:
+         (Intercept)  Orange$circumference  
+              16.604                 7.816  
+
+> lmresult <- lm(Orange$age~Orange$circumference)
+> summary(lmresult)
+
+Call:
+lm(formula = Orange$age ~ Orange$circumference)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-317.88 -140.90  -17.20   96.54  471.16 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)           16.6036    78.1406   0.212    0.833    
+Orange$circumference   7.8160     0.6059  12.900 1.93e-14 ***
+---
+Signif. codes:  0 �***� 0.001 �**� 0.01 �*� 0.05 �.� 0.1 � � 1
+
+Residual standard error: 203.1 on 33 degrees of freedom
+Multiple R-squared:  0.8345,	Adjusted R-squared:  0.8295 
+F-statistic: 166.4 on 1 and 33 DF,  p-value: 1.931e-14
+
+> set.seed(20)
+> ind <- sample(2, nrow(Orange), replace = TRUE, prob = c(0.8, 0.2))
+> training <- Orange[ind==1,]
+> testing <- Orange[ind==2,]

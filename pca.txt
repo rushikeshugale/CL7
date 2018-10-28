@@ -1,0 +1,78 @@
+set.seed(90)
+> ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.8, 0.2))
+> iris.training <- iris[ind==1, 1:4]
+> head(iris.training)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width
+1          5.1         3.5          1.4         0.2
+3          4.7         3.2          1.3         0.2
+5          5.0         3.6          1.4         0.2
+6          5.4         3.9          1.7         0.4
+7          4.6         3.4          1.4         0.3
+8          5.0         3.4          1.5         0.2
+> iris.test <- iris[ind==2, 1:4]
+> head(iris.test)
+   Sepal.Length Sepal.Width Petal.Length Petal.Width
+2           4.9         3.0          1.4         0.2
+4           4.6         3.1          1.5         0.2
+13          4.8         3.0          1.4         0.1
+15          5.8         4.0          1.2         0.2
+19          5.7         3.8          1.7         0.3
+22          5.1         3.7          1.5         0.4
+> pc <- prcomp(training[,-5], center=TRUE, scale. = TRUE)
+Error in prcomp(training[, -5], center = TRUE, scale. = TRUE) : 
+  object 'training' not found
+> library(grid)
+> pairs.panels(Grid[, -5],)
+Error in pairs.panels(Grid[, -5], ) : 
+  could not find function "pairs.panels"
+> data_iris <- iris[1:4]
+> Cov_data <- cov(data_iris )
+> Eigen_data <- eigen(Cov_data)
+> 
+> PCA_data <- princomp(data_iris ,cor="False")
+> Eigen_data$values
+[1] 4.22824171 0.24267075 0.07820950 0.02383509
+> PCA_data$sdev^2
+    Comp.1     Comp.2     Comp.3     Comp.4 
+4.20005343 0.24105294 0.07768810 0.02367619 
+> PCA_data$loadings[,1:4]
+                  Comp.1      Comp.2      Comp.3     Comp.4
+Sepal.Length  0.36138659 -0.65658877 -0.58202985  0.3154872
+Sepal.Width  -0.08452251 -0.73016143  0.59791083 -0.3197231
+Petal.Length  0.85667061  0.17337266  0.07623608 -0.4798390
+Petal.Width   0.35828920  0.07548102  0.54583143  0.7536574
+> Eigen_data$vectors
+            [,1]        [,2]        [,3]       [,4]
+[1,]  0.36138659 -0.65658877 -0.58202985  0.3154872
+[2,] -0.08452251 -0.73016143  0.59791083 -0.3197231
+[3,]  0.85667061  0.17337266  0.07623608 -0.4798390
+[4,]  0.35828920  0.07548102  0.54583143  0.7536574
+> 
+> summary(PCA_data)
+Importance of components:
+                          Comp.1     Comp.2     Comp.3      Comp.4
+Standard deviation     2.0494032 0.49097143 0.27872586 0.153870700
+Proportion of Variance 0.9246187 0.05306648 0.01710261 0.005212184
+Cumulative Proportion  0.9246187 0.97768521 0.99478782 1.000000000
+> biplot (PCA_data)
+> screeplot(PCA_data, type="lines")
+> PCA_data$scale
+Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+           1            1            1            1 
+
+> PCA_data$center
+Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+    5.843333     3.057333     3.758000     1.199333 
+> PCA_data$scale
+Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+           1            1            1            1 
+> print(PCA_data)
+Call:
+princomp(x = data_iris, cor = "False")
+
+Standard deviations:
+   Comp.1    Comp.2    Comp.3    Comp.4 
+2.0494032 0.4909714 0.2787259 0.1538707 
+
+ 4  variables and  150 observations.
+> 
