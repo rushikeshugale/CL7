@@ -6,9 +6,6 @@ class hellman {
 		System.out.print("Enter two prime number:");
 		int p = scan.nextInt();
 		int q = scan.nextInt();
-		
-		//System.out.print("Enter primitive root of " +p+" :");
-		//int g = scan.nextInt();
 
 		System.out.print("For side A enter secret integer number:");
 		int a = scan.nextInt();
